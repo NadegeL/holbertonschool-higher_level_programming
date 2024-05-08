@@ -1,4 +1,4 @@
-# Zen of Python Easter Egg
+#!/usr/bin/python3
 import this
  
 print(this.s)
