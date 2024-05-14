@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import sys
-    
     argv = sys.argv[1:]
 if len(argv) == 0:
     print("{} arguments.".format(len(argv)))
