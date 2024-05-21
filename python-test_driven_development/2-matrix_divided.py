@@ -21,8 +21,3 @@ def matrix_divided(matrix, div):
     matrice = [[round(elem / div, 2)for elem in row] for row in matrix]
 
     return matrice
-
-
-if__name__ = "__main__"
-import doctest
-doctest.testfile(test/2-matrix_divided.py)
