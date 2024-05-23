@@ -58,5 +58,5 @@ class Rectangle:
     
     def __repr__(self):
         """ create a repr de str rectangle"""
-        return 'Rectangle ({}{})'.format(self.height, self.width)
+        return 'Rectangle ({}, {})'.format(self.height, self.width)
             
