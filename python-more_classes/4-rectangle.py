@@ -52,10 +52,10 @@ class Rectangle:
         """return a string representation of rectangle"""
         if self.__width == 0 or self.height == 0:
             return ""
-        
+
         lines = ["#" * self.__width for _ in range(self.height)]
         return "\n".join(lines)
-    
+
     def __repr__(self):
         """ create a repr de str rectangle"""
-        return f"Rectangle({self.__width},{self.__height})"
+        return f"Rectangle({self.__width}, {self.__height})"
