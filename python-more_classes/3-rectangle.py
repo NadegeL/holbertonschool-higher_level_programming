@@ -47,3 +47,12 @@ class Rectangle:
         if self.width == 0 or self.height == 0:
             return 0
         return 2 * (self.width + self.height)
+
+    def __str__(self):
+        """return a string representation of rectangle"""
+        if self.__width == 0 or self.height == 0:
+            return ""
+        
+        lines = ["#" * self.__width for _ in range(self.height)]
+        return "\n".join(lines)
+            
