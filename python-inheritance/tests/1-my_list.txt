@@ -9,16 +9,16 @@ Tests
 
 >>> my_list.append(4)
 >>> print(my_list)
-[4]
+[1, 4]
 
 >>> my_list.append(2)
 >>> print(my_list)
-[4, 2]
+[1, 4, 2]
 
 >>> my_list.append(3)
 >>> print(my_list)
-[3]
+[1, 4, 2, 3]
 
 >>> my_list.append(5)
 >>> print(my_list)
-[5]
+[1, 4, 2, 3, 5]
