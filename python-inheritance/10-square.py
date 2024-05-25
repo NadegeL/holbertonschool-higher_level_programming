@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""subclass of subclass with super()"""
+
+
 Rectangle = __import__('9-rectangle').Rectangle
 
 
