@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" 
-function that returns if the object 
+"""
+function that returns if the object
 is an instance of a class that inherited
 """
 
