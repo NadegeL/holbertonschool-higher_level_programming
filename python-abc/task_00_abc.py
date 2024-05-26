@@ -13,20 +13,24 @@ class Animal(ABC):
         """
         pass
 
+
 class Dog(Animal):
     """
     Dog class inherits from Animal
     """
+
     def sound(self):
         """
         Method that return the string Bark
         """
         return "Bark"
 
+
 class Cat(Animal):
     """
     Cat class inherits from Animal
     """
+
     def sound(self):
         """
         Method that return the string Meow
