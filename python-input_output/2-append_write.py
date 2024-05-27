@@ -6,6 +6,8 @@ UTF8) and returns the number of characters added:
 
 
 def append_write(filename="", text=""):
+    """function append and write"""
+    
     with open(filename, 'a', encoding="UTF-8") as f:
         nb_characters = f.write(text)
         return nb_characters
