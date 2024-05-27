@@ -8,5 +8,5 @@ import json
 
 def to_json_string(my_obj):
     """method json"""
-    json_string = json.dumps(my_obj, ensure_ascii=False)
-    print(json_string)
+    json_string = json.dumps(my_obj)
+    return (json_string)
