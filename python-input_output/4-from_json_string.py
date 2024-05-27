@@ -8,5 +8,4 @@ import json
 
 def from_json_string(my_str):
     """method json"""
-    json_string = json.loads(my_str)
-    return (my_str)
+    return json.loads(my_str)
