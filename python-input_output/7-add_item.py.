@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+"""
+Write a script that adds all arguments to a Python list,
+and then save them to a file
+”"""
+
+import sys
+import json
+
+
+save_to_json_files = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+"""
+    1. lire le contenu du fichier(File 5)
+    2. ajouter les nvx elts à l'objet(File 6)
+    3. ecrire l'obj ds un file json
+"""
+
+if __name__ == "__main__":
+    try:
+        item = load_from_json_file("add_item.json")
+    except FileNotFoundError:
+        item = []
+    item.extend(sys.argv[1:])
+    """Add command-line arguments to the list """
+    save_to_json_files(item, "add_items.json")
+    """# Save the updated list back to the file"""
