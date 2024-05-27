@@ -5,4 +5,5 @@
 def read_file(filename=""):
     """protype of function"""
     with open(filename, "r", encoding="UTF-8") as f:
-        print("f.read()")
+        my_file = f.read()
+        print("f", end="")
