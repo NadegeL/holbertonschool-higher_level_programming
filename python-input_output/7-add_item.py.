@@ -16,11 +16,15 @@ load_from_json_file = \
         3. ecrire l'obj ds un file json
     """
 
+filename = "add_item.json"
+
 try:
     item = load_from_json_file("add_item.json")
 except FileNotFoundError:
     item = []
-    item.extend(sys.argv[1:])
-    """Add command-line arguments to the list """
-    save_to_json_files(item, "add_items.json")
-    """# Save the updated list back to the file"""
+
+item.extend(sys.argv[1:])
+"""Add command-line arguments to the list """
+
+save_to_json_files(item, filename)
+"""Save the updated list back to the file"""
