@@ -24,7 +24,7 @@ class CustomObject:
         and save it to the provided filename.
         """
 
-        with open('filename', 'wb') as f:
+        with open(filename, "wb") as f:
             pickle.dump(self, f)
 
     @classmethod
@@ -34,5 +34,5 @@ class CustomObject:
         the CustomObject from the provided filename
         """
 
-        with open('filename', 'rb') as f:
+        with open(filename, "rb") as f:
             return pickle.load(f)
