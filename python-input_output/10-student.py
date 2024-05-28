@@ -11,4 +11,15 @@ class Student:
 
     def to_json(self, attrs=None):
         """create a dict of class attributs"""
-        return self.__dict__
+
+        if attrs is None:
+            return self.__dict__
+
+        if isinstance(attrs, list):
+            my_dict = {}
+        for attr in attrs:
+            if hasattr(self, attr):
+                my_dict[attr] = getattr(self, attr)
+            return my_dict
+
+        return {}
