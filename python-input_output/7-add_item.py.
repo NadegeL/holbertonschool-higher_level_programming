@@ -19,7 +19,7 @@ load_from_json_file = \
 filename = "add_item.json"
 
 try:
-    item = load_from_json_file("add_item.json")
+    item = load_from_json_file(filename)
 except FileNotFoundError:
     item = []
 
