@@ -21,5 +21,5 @@ class Student:
             if hasattr(self, attr):
                 my_dict[attr] = getattr(self, attr)
         return my_dict
-    
+
         return self.__dict__
