@@ -1,0 +1,4 @@
+curl http://example.com
+curl https://jsonplaceholder.typicode.com/posts
+curl -I https://jsonplaceholder.typicode.com/posts
+curl -X POST -d "title=foo&body=bar&userId=1" https://jsonplaceholder.typicode.com/posts
