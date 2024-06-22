@@ -1,0 +1,1 @@
+learn the ORM (python and mysql)
