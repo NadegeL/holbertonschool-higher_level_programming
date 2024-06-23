@@ -22,8 +22,8 @@ if __name__ == '__main__':
     cur = db.cursor()
 
     # Utilisation de paramètres pour la requête pour éviter les injections SQL
-    query = "SELECT * FROM states WHERE name LIKE BINARY \
-        %s ORDER BY states.id ASC"
+    query = ("SELECT * FROM states WHERE name LIKE BINARY '{}' \
+                ORDER BY states.id ASC".format(argv[4]))
     cur.execute(query, (argv[4],))
 
     # Récupération des résultats
