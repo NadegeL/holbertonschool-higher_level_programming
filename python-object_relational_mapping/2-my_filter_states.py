@@ -10,29 +10,24 @@ import MySQLdb
 from sys import argv
 
 if __name__ == '__main__':
-    mysql_username = argv[1]
-    mysql_password = argv[2]
-    database_name = argv[3]
-    state_name = argv[4]
-
     db = MySQLdb.connect(
         host="localhost",
-        user=mysql_username,
-        passwd=mysql_password,
-        db=database_name,
-        port=3306
+        port=3306,
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
     )
 
-    cursor = db.cursor()
+    cur = db.cursor()
 
-    query = "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id ASC".format(state_name)
-    
-    cursor.execute(query, (state_name,))
+    query_part1 = "SELECT * FROM states WHERE name = "
+    query_part2 = "'{}'".format(argv[4])
+    query = query_part1 + query_part2
 
-    rows = cursor.fetchall()
+    cur.execute(query)
 
+    rows = cur.fetchall()
     for row in rows:
-        print
-
-    cursor.close()
+        print(row)
+    cur.close()
     db.close()
