@@ -23,7 +23,7 @@ if __name__ == '__main__':
                 ORDER BY states.id ASC".format(argv[4]))
 
     row = cur.fetchall()
-    for r in row:
-        print(r)
+    for rows in row:
+        print(rows)
 cur.close()
 db.close()
