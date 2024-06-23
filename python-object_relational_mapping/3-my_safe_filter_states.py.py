@@ -11,28 +11,24 @@ But this time, write one that is safe from MySQL injections!
 
 
 import MySQLdb
-import sys
+from sys import argv
 
-
-if __name__ == "__main__":
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    database_name = sys.argv[3]
-    state_name_searched = sys.argv[4]
+if __name__ == '__main__':
     
-    db = MySQLdb.connect(host="localhost",
-                         user=mysql_username,
-                         passwd=mysql_password,
-                         db=database_name,
-                         port=3306)
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
+    )
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
+                ORDER BY states.id ASC", (argv[4],))
+    rows = cur.fetchall()
 
-    cursor = db.cursor()
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(query, (state_name_searched,))
-
-    results = cursor.fetchall()
-    for row in results:
+    for row in rows:
         print(row)
 
-    cursor.close()
+    cur.close()
     db.close()
