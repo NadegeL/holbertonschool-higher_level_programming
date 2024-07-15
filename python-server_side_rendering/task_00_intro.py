@@ -1,56 +1,48 @@
-#!/usr/bin/env python3
-
 import os
 
 
-def generate_invitations(template_path, attendees):
-    """read the content of file"""
-    try:
-        with open(template_path, 'r') as file:
-            template = file.read()
-    except FileNotFoundError:
-        print(f"Error: Template file '{template_path}' not found.")
+def generate_invitations(template, attendees):
+    if template is None or not isinstance(template, str):
+        print("Template is not a string")
         return
-
-    """verify if attendees is a list of dictionaries"""
-    if not isinstance(attendees, list):
-        print("attendees must be a list of dictionaries")
+    if attendees is None or not isinstance(attendees, list):
+        print("Attendees is not a list")
         return
-
-    if not all(isinstance(i, dict) for i in attendees):
-        print("attendees must be a list of dictionaries")
+    
+    if not template:
+        print("Template is empty, no output files generated.")
         return
-
-    """verify if template is empty"""
-    if not template.strip():
-        print("Error: Template is empty,no output files generated.")
-        return
-    """create output directory"""
-    output_dir = "output"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    """verify if attendees is empty"""
+    
     if not attendees:
-        print(" No data provided, no output files generated.")
+        print("No data provided, no output files generated.")
         return
+    
+    try:
+        for index, attendee in enumerate(attendees, start=1):
+            name_placeholder = "{name}"
+            event_title_placeholder = "{event_title}"
+            event_date_placeholder = "{event_date}"
+            event_location_placeholder = "{event_location}"
 
+            name_value = attendee.get("name") or "N/A"
+            event_title_value = attendee.get("event_title") or "N/A"
+            event_date_value = attendee.get("event_date") or "N/A"
+            event_location_value = attendee.get("event_location") or "N/A"
+            
+            result = template.replace(name_placeholder, name_value).replace(event_title_placeholder, event_title_value).replace(event_date_placeholder, event_date_value).replace(event_location_placeholder, event_location_value)
+            
+            output_filename = f'output_{index}.txt'
 
-    """list of attendees and generate the invitation"""
-    for idx, attendee in enumerate(attendees, start=1):
-        output = template
-        print(f"Processing {attendee['name']}")
-        for key in ["name", "event_title", "event_date", "event_location"]:
-            value = str(attendee.get(key, "N/A")) if attendee.get(key) is not None else "N/A"
-            print(f"Replacing {{{key}}} with {value}")
-            output = output.replace(f"{{{key}}}", value)
-        output_file_path = os.path.join(output_dir, f"invitation_{idx}.txt")
-        
-        with open(output_file_path, "w") as file:
-            file.write(output)
-        print(f"Generated file: {output_file_path}")
+            # Check if the file already exists
+            if os.path.exists(output_filename):
+                print(f"File {output_filename} already exists. Skipping...")
+                continue  # Skip writing if the file already exists
 
-    if os.path.exists(output_file_path):
-        print(f"Invitation file {idx} successfully created.")
-    else:
-        print(f"Error: Failed to create invitation file {idx}.")
+            with open(output_filename, 'w') as output_file:
+                output_file.write(result)
+
+        print(f"{len(attendees)} files generated")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return
