@@ -16,12 +16,9 @@ def generate_invitations(template_path, attendees):
     if not isinstance(attendees, list):
         print("attendees must be a list of dictionaries")
         return
-
     if not all(isinstance(i, dict) for i in attendees):
-        print("attendees must be a list of dictionaries")
+        print("Error: attendees must be a list of dictionaries")
         return
-
-    """verify if template is empty"""
     if not template.strip():
         print("Error: Template is empty,no output files generated.")
         return
@@ -29,12 +26,6 @@ def generate_invitations(template_path, attendees):
     output_dir = "output"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-
-    """verify if attendees is empty"""
-    if not attendees:
-        print(" No data provided, no output files generated.")
-        return
-
 
     """list of attendees and generate the invitation"""
     for idx, attendee in enumerate(attendees, start=1):
