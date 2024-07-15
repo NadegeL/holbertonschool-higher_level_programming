@@ -22,19 +22,19 @@ def generate_invitations(template_path, attendees):
         return
 
     """verify if template is empty"""
-    if not template:
-        print("template is empty,no output files generated.")
+    if not template.strip():
+        print("Error: Template is empty,no output files generated.")
         return
+    """create output directory"""
+    output_dir = "output"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     """verify if attendees is empty"""
     if not attendees:
         print(" No data provided, no output files generated.")
         return
 
-    """create output directory"""
-    output_dir = "output"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
 
     """list of attendees and generate the invitation"""
     for idx, attendee in enumerate(attendees, start=1):
@@ -44,11 +44,16 @@ def generate_invitations(template_path, attendees):
             value = str(attendee.get(key, "N/A")) if attendee.get(key) is not None else "N/A"
             print(f"Replacing {{{key}}} with {value}")
             output = output.replace(f"{{{key}}}", value)
-        output_file_path = f"{output_dir}/invitation_{idx}.txt"
+        output_file_path = os.path.join(output_dir, f"invitation_{idx}.txt")
+        
         with open(output_file_path, "w") as file:
             file.write(output)
         print(f"Generated file: {output_file_path}")
 
+    if os.path.exists(output_file_path):
+        print(f"Invitation file {idx} successfully created.")
+    else:
+        print(f"Error: Failed to create invitation file {idx}.")
 
 attendees = [
     {"name": "Alice", "event_title": "Python Conference",
