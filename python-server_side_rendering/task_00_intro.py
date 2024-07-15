@@ -9,7 +9,7 @@ def generate_invitations(template_path, attendees):
         with open(template_path, 'r') as file:
             template = file.read()
     except FileNotFoundError:
-        print("Error: Template not found")
+        print(f"Error: Template file '{template_path}' not found.")
         return
 
     """verify if attendees is a list of dictionaries"""
@@ -41,7 +41,7 @@ def generate_invitations(template_path, attendees):
         output = template
         print(f"Processing {attendee['name']}")
         for key in ["name", "event_title", "event_date", "event_location"]:
-            value = str(attendee.get(key, "N/A"))
+            value = str(attendee.get(key, "N/A")) if attendee.get(key) is not None else "N/A"
             print(f"Replacing {{{key}}} with {value}")
             output = output.replace(f"{{{key}}}", value)
         output_file_path = f"{output_dir}/invitation_{idx}.txt"
