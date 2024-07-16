@@ -1,6 +1,6 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, jsonify
 import os
+import json
 
 
 def generate_invitations(template, attendees):
@@ -10,15 +10,15 @@ def generate_invitations(template, attendees):
     if attendees is None or not isinstance(attendees, list):
         print("Attendees is not a list")
         return
-    
+
     if not template:
         print("Template is empty, no output files generated.")
         return
-    
+
     if not attendees:
         print("No data provided, no output files generated.")
         return
-    
+
     try:
         for index, attendee in enumerate(attendees, start=1):
             name_placeholder = "{name}"
@@ -30,9 +30,10 @@ def generate_invitations(template, attendees):
             event_title_value = attendee.get("event_title") or "N/A"
             event_date_value = attendee.get("event_date") or "N/A"
             event_location_value = attendee.get("event_location") or "N/A"
-            
-            result = template.replace(name_placeholder, name_value).replace(event_title_placeholder, event_title_value).replace(event_date_placeholder, event_date_value).replace(event_location_placeholder, event_location_value)
-            
+
+            result = template.replace(name_placeholder, name_value).replace(event_title_placeholder, event_title_value).replace(
+                event_date_placeholder, event_date_value).replace(event_location_placeholder, event_location_value)
+
             output_filename = f'output_{index}.txt'
 
             # Check if the file already exists
@@ -49,19 +50,36 @@ def generate_invitations(template, attendees):
         print(f"An error occurred: {e}")
         return
 
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
+
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+
+def load_items():
+    with open('items.json') as f:
+        data = json.load(f)
+    return data['items']
+
+
+@app.route('/items')
+def items():
+    items = load_items()
+    return render_template('items.html')
+
+
+    if __name__ == '__main__':
+        app.run(debug=True)
