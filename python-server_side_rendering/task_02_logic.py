@@ -78,7 +78,7 @@ def load_items():
 @app.route('/items')
 def items():
     items = load_items()
-    return render_template('items.html')
+    return render_template('items.html', items=items)
 
 
 if __name__ == '__main__':
