@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify
 import os
 import json
 
+app = Flask(__name__)
 
 def generate_invitations(template, attendees):
     if template is None or not isinstance(template, str):
@@ -50,36 +51,27 @@ def generate_invitations(template, attendees):
         print(f"An error occurred: {e}")
         return
 
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
 def load_items():
     with open('items.json') as f:
         data = json.load(f)
     return data['items']
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @app.route('/items')
 def items():
     items = load_items()
-    return render_template('items.html', items=items)
-
+    return render_template('items.html', items=items), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
