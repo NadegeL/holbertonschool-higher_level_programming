@@ -14,10 +14,10 @@
             {% for items in items %}
                 <li>{{items}}</li>
             {% endfor %}
+            {% else %}
+            <li>No items found</li>
+            {% endif %}
         </ul>
-        {% else %}
-            <p>No items found</p>
-        {% endif %}
     </main>
     {% include 'footer.html' %}
 </body>
