@@ -26,4 +26,4 @@ def items():
     return render_template('items.html', items=items), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True)
