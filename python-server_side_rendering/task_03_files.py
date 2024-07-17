@@ -57,4 +57,4 @@ def product_display():
     return render_template('products.html', products=products, error_message=error_message)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5200)
+    app.run(debug=True)
