@@ -56,20 +56,28 @@ def products():
     source = request.args.get('source')
     product_id = request.args.get('id')
 
-    if source not in ['json', 'csv']:
-        return render_template('product_display.html', error="Wrong source")
+    if source == 'json':
+        product_json_file_path = os.path.join(os.path.dirname(__file__), 'products.json')
+        with open(product_json_file_path, 'r', encoding='UTF-8') as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                products = data
+            else:
+                products = data.get('products', dict)
 
-    data = read_data(source)
+    elif source == 'csv':
+        product_csv_file_path = os.path.join(os.path.dirname(__file__), 'products.csv')
+        with open(product_csv_file_path, 'r', encoding='UTF-8') as f:
+            reader = csv.DictReader(f)
+            products = list(reader)
 
-    if product_id:
-        filtered_data = [
-            product for product in data if product['id'] == product_id]
-        if not filtered_data:
-            return render_template('product_display.html', error="Product not found")
-        return render_template('product_display.html', products=filtered_data)
+    else:
+        error_message = "Wrong source"
+        
+    if product_id and not error_message:
+        products = [product for product in products if str(product.get('id')) == str(product_id)]
 
-    return render_template('product_display.html', products=data)
-
+    return render_template('products.html', products=products, error_message=error_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
