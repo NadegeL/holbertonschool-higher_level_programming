@@ -1,60 +1,37 @@
 from flask import Flask, render_template, request
 import json
+import os
 import csv
 
 app = Flask(__name__)
-
-
-def load_items():
-    with open('items.json') as f:
-        data = json.load(f)
-    return data['items']
-
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-
 @app.route('/about')
 def about():
     return render_template('about.html')
-
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
-
 @app.route('/items')
 def items():
-    with open('items.json') as f:
-        item = json.load(f).get("items", [])
-    return render_template('items.html', items=item), 200
+    items_file_path = os.path.join(os.path.dirname(__file__), 'items.json')
+    with open(items_file_path, 'r', encoding='UTF-8') as f:
+        data = json.load(f)
 
-
-def read_data(source):
-    if source == 'json':
-        return read_json('products.json')
-    elif source == 'csv':
-        return read_csv('products.csv')
-
-
-def read_json(filepath):
-    with open(filepath, 'r') as file:
-        return json.load(file)
-
-
-def read_csv(filepath):
-    with open(filepath, newline='') as file:
-        reader = csv.DictReader(file)
-        return [row for row in reader]
-
+    items = data.get('items', [])
+    return render_template('items.html', items=items)
 
 @app.route('/products')
-def products():
+def product_display():
     source = request.args.get('source')
     product_id = request.args.get('id')
+    products = []
+    error_message = None
 
     if source == 'json':
         product_json_file_path = os.path.join(os.path.dirname(__file__), 'products.json')
@@ -73,11 +50,11 @@ def products():
 
     else:
         error_message = "Wrong source"
-        
+
     if product_id and not error_message:
         products = [product for product in products if str(product.get('id')) == str(product_id)]
 
     return render_template('products.html', products=products, error_message=error_message)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5200)
