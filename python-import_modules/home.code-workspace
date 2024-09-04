@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "home",
+			"path": "../../.."
+		},
+		{
+			"name": "holbertonschool-chatgpt-introduction",
+			"path": "../../../../holbertonschool-chatgpt-introduction"
+		}
+	],
+	"settings": {}
+}
