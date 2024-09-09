@@ -14,7 +14,6 @@ if __name__ == "__main__":
     operator = sys.argv[2]
     b = int(sys.argv[3])
 
-    # Effectuer l'opération en fonction de l'opérateur
     if operator == '+':
         result = add(a, b)
 
