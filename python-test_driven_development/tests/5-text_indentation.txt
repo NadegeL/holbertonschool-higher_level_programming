@@ -14,3 +14,18 @@ raise TypeError("text must be a string")
 # :
 #
 # .
+
+>>> print("No ponctuation here")
+No ponctuation here
+
+>>> print("Hello: it's me.)
+Hello:
+#
+#it's me.
+
+>>> print("Where is Bryan? Bryan is:in the kitchen.)
+#Where is Bryan?
+#
+#Bryan is:
+#
+#in the kitchen.
