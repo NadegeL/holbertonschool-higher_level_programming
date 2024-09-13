@@ -1,0 +1,16 @@
+test module 'text_indentation'
+-----------------------------------------
+
+>>> print(12334)
+raise TypeError("text must be a string")
+
+>>> print(".?::.")
+# .
+#
+# ?
+#
+# :
+#
+# :
+#
+# .
