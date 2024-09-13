@@ -17,7 +17,11 @@ test module 'add integer'
 61
 
 >>> add_integer(10, 'Hello')
-"b must be an integer"
+Traceback (most recent call last):
+...
+TypeError: "b must be an integer"
 
 >>> add_integer(None)
-"a must be an integer"
+Traceback(most recent call last):
+...
+TypeError:"a must be an integer"
