@@ -4,6 +4,7 @@
 
 class Square:
     """ this is class Square"""
+
     def __init__(self, size=0, position=(0, 0)):
         """instance attribut size and position"""
         if not isinstance(size, int):
@@ -37,9 +38,14 @@ class Square:
         """private instance must be a tuple of 2 positive integers"""
         for i in tuple(value):
             if not isinstance(i, int):
-                raise TypeError("position must be a tupke of 2 positive integers")
+                raise TypeError(
+                    "position must be a tuple of 2 positive integers")
             if i < 0:
-                raise TypeError("position must be a tuple of 2 positive integers")    
+                raise TypeError(
+                    "position must be a tuple of 2 positive integers")
+            if len(value) != 2:
+                raise TypeError(
+                    "position must be a tuple of 2 positive integers")
         self.__position = value
 
     def area(self):
@@ -48,7 +54,7 @@ class Square:
 
     def my_print(self):
         """print square with #"""
-        for _ in range(self.__position[1]):
+        for i in range(self.__position[1]):
             print()
         for i in range(self.__size):
             print(" " * self.__position[0] + "#" * self.__size)
