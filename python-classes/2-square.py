@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-""" this is class Square that defines size"""
-
 
 class Square:
+    """ this is class Square that defines size"""
     def __init__(self, size=0):
         """size in private instance attribute"""
         while not isinstance(size, int):
