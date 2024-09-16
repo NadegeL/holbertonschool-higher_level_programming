@@ -6,7 +6,7 @@ class Square:
     """ this is class Square"""
     def __init__(self, size=0, position=(0, 0)):
         """instance attribut size and position"""
-        while not isinstance(size, int):
+        if not isinstance(size, int):
             raise TypeError("size must be an integer")
         if size < 0:
             raise ValueError("size must be >= 0")
@@ -21,7 +21,7 @@ class Square:
     @size.setter
     def size(self, value):
         """private instance return size"""
-        while not isinstance(value, int):
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
         if value < 0:
             raise ValueError("size must be >= 0")
@@ -30,15 +30,16 @@ class Square:
     @property
     def position(self):
         """private instance return position"""
-        return self.position
+        return self.__position
 
     @position.setter
     def position(self, value):
         """private instance must be a tuple of 2 positive integers"""
-        if not isinstance(value, tuple):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if value < 0:
-            raise TypeError("position must be a tuple of 2 positive integers")
+        for i in tuple(value):
+            if not isinstance(i, int):
+                raise TypeError("position must be a tupke of 2 positive integers")
+            if i < 0:
+                raise TypeError("position must be a tuple of 2 positive integers")    
         self.__position = value
 
     def area(self):
