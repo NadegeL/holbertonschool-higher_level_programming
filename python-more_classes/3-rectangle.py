@@ -54,6 +54,7 @@ class Rectangle:
         if self.__height == 0 or self.__width == 0:
             return ""
         return "\n".join(["#" * self.__width] * self.__height)
+
     def my_print(self):
         """Method to print with # """
         print(self.__str__())
