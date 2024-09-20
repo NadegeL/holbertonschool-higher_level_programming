@@ -57,7 +57,9 @@ class Rectangle:
         """Method to print a string representation"""
         if self.__height == 0 or self.__width == 0:
             return ""
-        return "\n".join([str(self.print_symbol) * self.__width] * self.__height)
+        return "\n".join(
+            [str(self.print_symbol) * self.__width] * self.__height
+        )
 
     def my_print(self):
         """Method to print with # """
