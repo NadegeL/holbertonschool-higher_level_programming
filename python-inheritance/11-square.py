@@ -24,6 +24,6 @@ class Square(Rectangle):
         """should return a string"""
         return "[Square] {}/{}".format(self.__size, self.__size)
 
-    def print(self):
-        """should print"""
-        print("[Square] {}/{}".format(self.__size, self.__size))
+    def repr(self):
+        """method appel str et print la chaine"""
+        return (self.__str__)

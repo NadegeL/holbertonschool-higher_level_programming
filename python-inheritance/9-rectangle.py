@@ -24,6 +24,6 @@ class Rectangle(BaseGeometry):
         """should return a string"""
         return "[Rectangle] {}/{}".format(self.__width, self.__height)
 
-    def print(self):
-        """should print"""
-        print("[Rectangle] {}/{}".format(self.__width, self.__height))
+    def __repr__(self):
+        """method appel str et print la chaine"""
+        return (self.__str__)

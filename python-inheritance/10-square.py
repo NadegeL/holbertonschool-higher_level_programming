@@ -11,11 +11,10 @@ class Square(Rectangle):
         """method to initialize square
         and use super() function
         """
-        self.__size = size
         self.integer_validator("size", size)
+        self.__size = size
         super().__init__(size, size)
 
     def area(self):
         """Public instance method"""
-        self.area = self.__size ** 2
-        return self.area
+        return self.__size ** 2
