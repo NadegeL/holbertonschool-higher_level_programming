@@ -30,7 +30,7 @@ class Circle(Shape):
 
     def perimeter(self):
         """implement perimeter method"""
-        return 2 * (3.14159265359 * self.radius)
+        return 2 * 3.14159265359 *(abs(self.radius))
 
 
 class Rectangle(Shape):
