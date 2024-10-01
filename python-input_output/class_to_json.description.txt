@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+"""Write a function that returns the dictionary description
+with simple data structure (list, dictionary, string, integer and boolean)
+for JSON serialization of an object:
+"""
+
+
+def class_to_json(obj):
+    # Si l'objet est un dictionnaire
+    if isinstance(obj, dict):
+        return {k: class_to_json(v) for k, v in obj.items()}
+    
+    # Si l'objet est une liste
+    elif isinstance(obj, list):
+        return [class_to_json(i) for i in obj]
+    
+    # Si l'objet est un type simple (string, int, bool, etc.)
+    elif isinstance(obj, (str, int, bool)):
+        return obj
+    
+    # Si l'objet est une instance d'une classe, renvoyer ses attributs sous forme de dictionnaire
+    else:
+        return obj.__dict__
+
