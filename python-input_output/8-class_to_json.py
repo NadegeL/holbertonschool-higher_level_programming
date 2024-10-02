@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Write a function that returns the dictionary
-description withsimple data structure 
+description withsimple data structure
 (list, dictionary, string, integer and boolean)
 for JSON serialization of an object:"""
 
