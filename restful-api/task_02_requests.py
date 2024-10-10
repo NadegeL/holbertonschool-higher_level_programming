@@ -20,9 +20,6 @@ def fetch_and_print_posts():
         print("No result")
 
 
-fetch_and_print_posts()
-
-
 def fetch_and_print_users():
     """fetches data and save on csv file"""
     url = 'https://jsonplaceholder.typicode.com/posts'
@@ -43,4 +40,6 @@ def fetch_and_print_users():
         print("No result")
 
 
-fetch_and_print_users()
+if __name__ == "__main__":
+    fetch_and_print_posts()
+    fetch_and_print_users()
