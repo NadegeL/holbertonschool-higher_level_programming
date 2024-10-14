@@ -35,13 +35,13 @@ class MyHandler(BaseHTTPRequestHandler):
                 'status': 'OK'
             }
             self.wfile.write(bytes(json.dumps(status), "utf8"))
-            
+
         elif self.path == '/info':
-           self.send_response(200)
-           self.send_header('Content-type', 'application/json')
-           self.end_headers()
-           info = {"version": "1.0", "description":
-                     "A simple API built with http.server"}
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            info = {"version": "1.0", "description":
+                    "A simple API built with http.server"}
 
         else:
             """gérer les endpoints failed"""
@@ -50,7 +50,8 @@ class MyHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'404 Not found')
 
+
 if __name__ == "__main__":
-   httpd = HTTPServer(('localhost', PORT), MyHandler)
-   print(f"Server running on localhost:{PORT}")
-   httpd.serve_forever()
+    httpd = HTTPServer(('localhost', PORT), MyHandler)
+    print(f"Server running on localhost:{PORT}")
+    httpd.serve_forever()
