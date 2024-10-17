@@ -17,12 +17,6 @@ def home():
 def data():
     return jsonify([user for user in users.values()])
 
-
-@app.route('/status')
-def status():
-    return "OK"
-
-
 @app.route('/users/<username>', methods=['GET'])
 def get_user(username):
 
@@ -48,5 +42,10 @@ def add_user():
                     "user": new_user}), 201
 
 
+@app.route('/status')
+def status():
+    return "OK"
+
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run()
