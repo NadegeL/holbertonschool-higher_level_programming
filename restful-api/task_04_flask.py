@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+""" Develop a Simple API using Python with Flask
+"""
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -20,22 +21,22 @@ users = {
 }
 
 
-@ app.route('/')
+@app.route('/')
 def home():
     return jsonify ("Welcome to the Flask API!")
 
 
-@ app.route('/data')
+@app.route('/data')
 def data():
     return jsonify(list(users.keys()))
 
 
-@ app.route('/status')
+@app.route('/status')
 def status():
     return jsonify("OK"), 200
 
 
-@ app.route('/users/<username>', methods=['GET'])
+@app.route('/users/<username>', methods=['GET'])
 def get_user(username):
 
     user = users.get(username)
@@ -46,7 +47,7 @@ def get_user(username):
         return jsonify({"error": "User not found"}), 404
 
 
-@ app.route('/add_user', methods=['POST'])
+@app.route('/add_user', methods=['POST'])
 def add_user():
     """function that add user"""
     new_user = request.get_json()

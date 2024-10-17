@@ -25,14 +25,14 @@ class MyHandler(BaseHTTPRequestHandler):
                 'age': 30,
                 'city': 'New York'
             }
-            self.wfile.write(bytes(json.dumps(data), "utf8"))
+            self.wfile.write (json.dumps(data).encode('utf8'))
 
         elif self.path == '/status':
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             status = (b"OK")
-            self.wfile.write(bytes(json.dumps(status), "utf8"))
+            self.wfile.write(json.dumps(status).encode("utf8"))
 
         elif self.path == '/info':
             self.send_response(200)
@@ -40,7 +40,7 @@ class MyHandler(BaseHTTPRequestHandler):
             self.end_headers()
             info = {"version": "1.0", "description":
                     "A simple API built with http.server"}
-            self.wfile.write(bytes(json.dumps(info), "utf8"))
+            self.wfile.write(json.dumps(info).encode("utf8"))
 
         else:
             """gérer les endpoints failed"""
