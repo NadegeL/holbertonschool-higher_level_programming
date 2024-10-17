@@ -21,7 +21,7 @@ class MyHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             data = {
-                'name': 'John Doe',
+                'name': 'John',
                 'age': 30,
                 'city': 'New York'
             }
@@ -31,9 +31,7 @@ class MyHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            status = {
-                'status': 'OK'
-            }
+            status = (b"OK")
             self.wfile.write(bytes(json.dumps(status), "utf8"))
 
         elif self.path == '/info':
