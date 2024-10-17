@@ -33,8 +33,7 @@ def verify_password(username, password):
 @app.route('/basic-protected', methods=['GET'])
 @auth.login_required
 def basic_protected():
-    return("Basic Auth: Access Granted")
-
+    return jsonify({"message": "Basic Auth: Access Granted"}), 200
 
 """route connected and generate token"""
 @app.route('/login', methods=['POST'])
@@ -59,7 +58,7 @@ def login():
 @app.route('/jwt-protected')
 @jwt_required()
 def jwt_protected():
-    return jsonify({"JWT Auth: Access Granted"})
+    return jsonify({"message": "JWT Auth: Access Granted"}), 200
 
 
 @jwt.unauthorized_loader
