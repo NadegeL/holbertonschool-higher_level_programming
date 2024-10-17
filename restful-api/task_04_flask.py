@@ -17,6 +17,7 @@ def home():
 def data():
     return jsonify([user for user in users.values()])
 
+
 @app.route('/users/<username>', methods=['GET'])
 def get_user(username):
 
@@ -30,16 +31,13 @@ def get_user(username):
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
-    """function that add user"""
+    """Function that allows the addition of new users"""
     new_user = request.get_json()
     username = new_user.get("username")
-
     if not username:
         return jsonify({"error": "Username is required"}), 400
-
     users[username] = new_user
-    return jsonify({"message": "User added successfully",
-                    "user": new_user}), 201
+    return jsonify({"message": "User added", "user": new_user}), 201
 
 
 @app.route('/status')
