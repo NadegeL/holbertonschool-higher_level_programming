@@ -22,6 +22,7 @@ if __name__ == '__main__':
         )
 
         cur = db.cursor()
+        # '%s' est un placeholder là ou on insert une valeur
         cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
                     ORDER BY states.id ASC", (argv[4],))
         rows = cur.fetchall()
