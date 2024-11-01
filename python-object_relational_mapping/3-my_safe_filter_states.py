@@ -6,12 +6,11 @@
 import MySQLdb
 from sys import argv
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    if len(argv) != 5:#vérification du nb d'argv
-        print("Usage : {} username password database \
-    state_name".format(argv[0]))
-        exit(1)
+    if len(argv) < 5 or len(argv) >= 6:  # vérification du nb d'argv
+        raise IndexError("Only exactly 5 arguments")
+    nb_argv = argv[4]
 
     try:
         db = MySQLdb.connect(
@@ -26,9 +25,8 @@ if __name__ == '__main__':
         # '%s' est un placeholder là ou on insert une valeur
         cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
                     ORDER BY states.id ASC", (argv[4],))
-        rows = cur.fetchall()
-
-        for row in rows:
+        row = cur.fetchone()
+        if row:
             print(row)
 
     except MySQLdb.Error as e:
