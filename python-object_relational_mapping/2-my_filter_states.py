@@ -7,7 +7,7 @@ from sys import argv
 
 if __name__ == '__main__':
 
-    if len(argv) != 5:
+    if len(argv) != 5:#vérification du nb d'argv
         print("Usage : {} username password database \
     state_name".format(argv[0]))
         exit(1)
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
         cur = db.cursor()
         cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
-                    ORDER BY states.id ASC",(argv[4],))
+                    ORDER BY states.id ASC", (argv[4],))
         rows = cur.fetchall()
 
         for row in rows:
