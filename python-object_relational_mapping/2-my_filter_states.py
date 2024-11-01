@@ -25,8 +25,8 @@ if __name__ == '__main__':
         # '%s' est un placeholder là ou on insert une valeur
         cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
                     ORDER BY states.id ASC", (argv[4],))
-        row = cur.fetchone()
-        if row:
+        rows = cur.fetchall()
+        for row in rows:
             print(row)
 
     except MySQLdb.Error as e:
