@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-""" lists all cities from the database hbtn_0e_4_usa"""
+"""script that takes in the name of a state as an
+argument and lists all cities of that state"""
 
 import MySQLdb
 from sys import argv
 
 if __name__ == '__main__':
-    if len(argv) != 4:
+    if len(argv) != 5:
         print("Usage: {} <mysql username> <mysql password> \
-<database name>".format(argv[0]))
+<database name> <state name>".format(argv[0]))
         exit(1)
 
     try:
@@ -21,16 +22,20 @@ if __name__ == '__main__':
         )
 
         cur = db.cursor()
-
         cur.execute("""
-                SELECT cities.id, cities.name,
-                states.name FROM cities
-                JOIN states ON cities.state_id = states.id
-                ORDER BY cities.id ASC
-                """)
+                    SELECT cities.name
+                    FROM cities
+                    JOIN states ON cities.state_id = states.id
+                    WHERE states.name = %s
+                    ORDER BY cities.id ASC
+                    """, (argv[4],))
         rows = cur.fetchall()
+        cities = []
         for row in rows:
-            print(row)
+            if row[0] not in cities:
+                cities.append(row[0])
+
+        print(",".join(cities))
 
     except MySQLdb.Error as e:
         print("MySQL Error : {}".format(e))
