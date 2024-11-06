@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Articles</title>
+    <meta charset="UTF-8" />
+    <title>Items List</title>
 </head>
 <body>
-    <h1>Liste des Articles</h1>
-    
-    {% if items %}
+    {% include 'header.html' %}
+    <main>
+        <h1>JSON items.</h1>
+        <p>This is a list of JSON items.</p>
         <ul>
-        {% for item in items %}
-            <li>{{ item }}</li>
-        {% endfor %}
+            {% if items %}
+                {% for item in items %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            {% else %}
+                <li> No items found </li>
+            {% endif %}    
         </ul>
-    {% else %}
-        <p>Aucun article trouvé</p>
-    {% endif %}
+    </main>
+    {% include 'footer.html' %}
 </body>
 </html>
