@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Items List</title>
-</head>
-<body>
+
     {% include 'header.html' %}
     <main>
-        <h1>JSON items.</h1>
-        <p>This is a list of JSON items.</p>
+        <h1>List items.</h1>
+        <p>List of items</p>
         <ul>
             {% if items %}
                 {% for item in items %}
@@ -20,5 +14,3 @@
         </ul>
     </main>
     {% include 'footer.html' %}
-</body>
-</html>cd
