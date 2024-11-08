@@ -35,22 +35,24 @@ def products():
     source = request.args.get('source', default=None, type=str)
     id = request.args.get('id', default=None, type=str)
 
+    if source not in ["json", "csv"]:
+        return render_template('product_display.html', error_message='Invalid source')
+
     if source == "json":
-        with open('products.json', 'r') as file:
+        with open('products.json') as file:
             data = json.load(file)
-
-    elif source == "csv":
-        with open('products.csv', 'r') as file:
-            reader = csv.DictReader(file)
+    else:  # source == "csv"
+        with open('products.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
             data = list(reader)
-
-    else:
-        return 'Wrong source', 400
 
     if id:
         data = [product for product in data if product['id'] == id]
-    return render_template('product_display.html', products=data)
 
+    if not data:
+        return render_template('product_display.html', error_message="No products found")
+
+    return render_template('product_display.html', products=data)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
