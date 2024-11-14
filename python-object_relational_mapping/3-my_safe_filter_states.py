@@ -1,39 +1,33 @@
 #!/usr/bin/python3
-"""lists all states with a name starting with N
-(upper N) from the database hbtn_0e_0_usa"""
+"""
+script that takes in arguments and displays all values
+in the states table of hbtn_0e_0_usa
+where name matches the argument.
+But this time, write one that is safe from MySQL injections!
+    Exécuter une requête paramétrée pour éviter les injections SQL
+    Connexion à la base de données MySQL
+
+"""
 
 import MySQLdb
 from sys import argv
 
 if __name__ == '__main__':
 
-    if len(argv) < 5 or len(argv) >= 6:  # vérification du nb d'argv
-        raise IndexError("Only exactly 5 arguments")
-    nb_argv = argv[4]
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
+    )
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
+                ORDER BY states.id ASC", (argv[4],))
+    rows = cur.fetchall()
 
-    try:
-        db = MySQLdb.connect(
-            host='localhost',
-            port=3306,
-            user=argv[1],
-            passwd=argv[2],
-            db=argv[3]
-        )
+    for row in rows:
+        print(row)
 
-        cur = db.cursor()
-        # '%s' est un placeholder là ou on insert une valeur
-        cur.execute("SELECT * FROM states WHERE name LIKE BINARY %s \
-                    ORDER BY states.id ASC", (argv[4],))
-        rows = cur.fetchall()
-        for row in rows:
-            print(row)
-
-    except MySQLdb.Error as e:
-        print("MySQLdb Error: {}".format(e))
-
-    finally:
-        if 'cur' in locals():
-            cur.close()
-
-        if 'db' in locals():
-            db.close()
+    cur.close()
+    db.close()
