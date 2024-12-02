@@ -1,0 +1,4 @@
+[1, 2, 3]
+"""Cette opération crée une nouvelle liste en concaténant l1 (qui est [1, 2, 3]) avec ``.
+Le résultat [1, 2, 3, 4] est une nouvelle liste, et sa référence est assignée à l1.
+Importante : Cette opération ne modifie pas la liste originale, mais crée une nouvelle liste."""
